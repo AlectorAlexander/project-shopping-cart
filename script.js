@@ -30,22 +30,21 @@ function getSkuFromProductItem(item) {
 function cartItemClickListener(event) {
   event.parentNode.removeChild(event);
 }
+
 let Subtotal = 0;
 const totalPrice = (const1, const2) => {
   const price = document.querySelector('.total-price');
   if (price === null) {
     Subtotal += const1;
   const cart = document.querySelector('.cart');
-  const total = createCustomElement('h1', 'total-price', `Subtotal: ${Subtotal}`);
+  const total = createCustomElement('h1', 'total-price', `${Subtotal}`);
   cart.appendChild(total);
 } else if (const1 !== null) {
-    Subtotal += const1;
     price.innerText = '';
-    price.innerText = `Subtotal: ${Subtotal}`;
+    price.innerText = `${Subtotal += const1}`;
   } else {
-    Subtotal -= const2;
     price.innerText = '';
-    price.innerText = `Subtotal: ${Subtotal}`;
+    price.innerText = `${Subtotal -= const2}`;
   }
 };
 
@@ -64,7 +63,7 @@ const cartItem = async (sku) => {
   const ol = document.querySelector('.cart__items');
   const promise = await fetchItem(sku);
   const { title: name } = promise;
-  const { base_price: salePrice } = promise;
+  const { price: salePrice } = promise;
   const obj = {
     sku,
     name,
@@ -100,6 +99,20 @@ return button.forEach((element) => element.addEventListener('click', function ()
   return cartItem(sku);
 }));
 };
+const removeStuffs = () => {
+ const cartI = document.querySelector('.cart__items');
+ if (cartI.childElementCount > 0) {
+   const children = document.querySelectorAll('.cart__item');
+  children.forEach((element) => {
+    cartItemClickListener(element);
+  });
+  const price = document.querySelector('.total-price');
+  Subtotal = 0;
+  cartItemClickListener(price);
+}
+};
+const emptyCart = document.querySelector('.empty-cart');
+emptyCart.addEventListener('click', removeStuffs);
 
  window.onload = () => {
    computador()
