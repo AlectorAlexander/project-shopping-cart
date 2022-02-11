@@ -19,7 +19,7 @@ describe('1 - Teste a função fecthProducts', () => {
     const fnction = await fetchProducts('computador');
     expect(fnction).toEqual(computadorSearch)
    });
-   it('se fetchProducts e computadorSearch são iguais', async () => {
+   it('se fetchProducts retorna um erro com a mensagem: You must provide an url', async () => {
     const fnction = await fetchProducts();
     expect(fnction).toEqual(new Error('You must provide an url'))
    });
