@@ -30,16 +30,36 @@ function getSkuFromProductItem(item) {
 function cartItemClickListener(event) {
   event.parentNode.removeChild(event);
 }
+let Subtotal = 0;
+const totalPrice = (const1, const2) => {
+  const price = document.querySelector('.total-price');
+  if (price === null) {
+    Subtotal += const1;
+  const cart = document.querySelector('.cart');
+  const total = createCustomElement('h1', 'total-price', `Subtotal: ${Subtotal}`);
+  cart.appendChild(total);
+} else if (const1 !== null) {
+    Subtotal += const1;
+    price.innerText = '';
+    price.innerText = `Subtotal: ${Subtotal}`;
+  } else {
+    Subtotal -= const2;
+    price.innerText = '';
+    price.innerText = `Subtotal: ${Subtotal}`;
+  }
+};
 
 function createCartItemElement({ sku, name, salePrice }) {
   const li = document.createElement('li');
   li.className = 'cart__item';
   li.innerText = `SKU: ${sku} | NAME: ${name} | PRICE: $${salePrice}`;
   li.addEventListener('click', function () {
+    totalPrice(null, salePrice);
     cartItemClickListener(li);
   });
   return li;
 }
+
 const cartItem = async (sku) => {
   const ol = document.querySelector('.cart__items');
   const promise = await fetchItem(sku);
@@ -51,6 +71,7 @@ const cartItem = async (sku) => {
     salePrice,
   };
   const createCart = createCartItemElement(obj);
+  totalPrice(obj.salePrice);
   return ol.appendChild(createCart);
 };
 
@@ -71,6 +92,7 @@ const computador = async () => {
  items.appendChild(item);
  });  
 };
+
 const itemButton = () => {
  const button = document.querySelectorAll('.item__add');
 return button.forEach((element) => element.addEventListener('click', function () {
