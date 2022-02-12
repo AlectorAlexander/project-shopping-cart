@@ -3,7 +3,7 @@ const Search = (text) => `https://api.mercadolibre.com/sites/MLB/search?q=${text
 const fetchProducts = async (text) => {
       try {
   const URL = Search(text);
-  if (text === '') {
+  if (text === '' || text === null || text === undefined) {
     throw new Error('You must provide an url');
   }
   const promise = await fetch(URL);

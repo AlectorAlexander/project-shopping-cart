@@ -5,7 +5,7 @@ const computadorSearch = require('../mocks/search');
 describe('1 - Teste a função fecthProducts', () => {
   it('se fetchProducts é uma função', async () => {
    const fnction = await fetchProducts;
-   expect(fnction).toBeInstanceOf(Function)
+   expect(typeof fnction).toBe('function')
   });
   it('se fetch é chamado', async () => {
     await fetchProducts('computador');

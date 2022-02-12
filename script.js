@@ -1,3 +1,8 @@
+const removeLoad = () => {
+  const load = document.querySelector('.loading');
+  load.parentElement.removeChild(load);
+ };
+
 function createProductImageElement(imageSource) {
   const img = document.createElement('img');
   img.className = 'item__image';
@@ -116,5 +121,6 @@ emptyCart.addEventListener('click', removeStuffs);
 
  window.onload = () => {
    computador()
-   .then(itemButton);   
+   .then(itemButton)
+   .then(removeLoad);
  };

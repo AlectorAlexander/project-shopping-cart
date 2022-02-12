@@ -152,3 +152,10 @@ body {
   margin-top: 20px;
   text-align: center;
 }
+
+.loading {
+  display: block;
+  position: absolute;
+  bottom: 80px;
+  left: 60px;
+}
