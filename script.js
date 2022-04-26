@@ -63,7 +63,10 @@ function createCartItemElement({ sku, name, salePrice }) {
   });
   return li;
 }
-
+const qualquer = async () => {
+ const things = await getSavedCartItems().json();
+ console.log(things);
+};
 const cartItem = async (sku) => {
   const ol = document.querySelector('.cart__items');
   const promise = await fetchItem(sku);
@@ -76,6 +79,8 @@ const cartItem = async (sku) => {
   };
   const createCart = createCartItemElement(obj);
   totalPrice(obj.salePrice);
+  saveCartItems(ol);
+  qualquer();
   return ol.appendChild(createCart);
 };
 
